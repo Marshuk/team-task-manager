@@ -13,7 +13,7 @@ const Projects = () => {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/projects');
+      const res = await axios.get('/api/projects');
       setProjects(res.data);
     } catch (error) {
       console.error(error);
@@ -29,7 +29,7 @@ const Projects = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/projects', newProject);
+      await axios.post('/api/projects', newProject);
       setShowModal(false);
       setNewProject({ name: '', description: '' });
       fetchProjects();

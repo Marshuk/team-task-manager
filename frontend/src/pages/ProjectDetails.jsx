@@ -17,8 +17,8 @@ const ProjectDetails = () => {
   const fetchData = async () => {
     try {
       const [projRes, usersRes] = await Promise.all([
-        axios.get(`http://localhost:5000/api/projects/${id}`),
-        axios.get('http://localhost:5000/api/users')
+        axios.get(`/api/projects/${id}`),
+        axios.get('/api/users')
       ]);
       setProject(projRes.data);
       setUsers(usersRes.data);
@@ -36,7 +36,7 @@ const ProjectDetails = () => {
   const handleCreateTask = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/tasks', { ...newTask, projectId: id });
+      await axios.post('/api/tasks', { ...newTask, projectId: id });
       setShowTaskModal(false);
       setNewTask({ title: '', description: '', dueDate: '', assigneeId: '' });
       fetchData();
@@ -47,7 +47,7 @@ const ProjectDetails = () => {
 
   const updateTaskStatus = async (taskId, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/tasks/${taskId}`, { status: newStatus });
+      await axios.put(`/api/tasks/${taskId}`, { status: newStatus });
       fetchData();
     } catch (error) {
       alert(error.response?.data?.message || 'Error updating task');
@@ -57,7 +57,7 @@ const ProjectDetails = () => {
   const handleDeleteTask = async (taskId) => {
     if (!window.confirm('Are you sure?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${taskId}`);
+      await axios.delete(`/api/tasks/${taskId}`);
       fetchData();
     } catch (error) {
       alert(error.response?.data?.message || 'Error deleting task');
