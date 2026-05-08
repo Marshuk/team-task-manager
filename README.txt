@@ -3,10 +3,10 @@ Team Task Manager (Full-Stack)
 A web application where users can create projects, assign tasks, and track progress with role-based access.
 
 ## Live URL
-[Insert your Railway Live URL here]
+https://team-task-manager-production-0f47.up.railway.app
 
 ## GitHub Repository
-[Insert your GitHub Repo URL here]
+https://github.com/Marshuk/team-task-manager
 
 ## Tech Stack
 - Frontend: React (Vite), React Router, Axios, Lucide React
