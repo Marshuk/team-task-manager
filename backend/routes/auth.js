@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!user) return res.status(400).json({ message: 'Invalid credentials: User not found' });
 
     let isMatch = false;
     if (user.password && user.password.startsWith('$2')) {
@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
     } else {
       isMatch = (password === user.password);
     }
-    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials: Password incorrect' });
 
     const token = jwt.sign({ id: user.id, role: user.role, name: user.name }, process.env.JWT_SECRET, {
       expiresIn: '7d',
