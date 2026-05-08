@@ -25,6 +25,17 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
 
+app.get('/debug', async (req, res) => {
+  try {
+    const url = process.env.DATABASE_URL || 'NOT_SET';
+    // hide password if present
+    const maskedUrl = url.replace(/:[^:@]+@/, ':***@');
+    res.json({ status: 'running', database_url: maskedUrl });
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
 // Serve frontend
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 app.get(/.*/, (req, res) => {
